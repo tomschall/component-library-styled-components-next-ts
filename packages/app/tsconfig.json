@@ -5,10 +5,7 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "isolatedModules": true,
-    "lib": [
-      "dom",
-      "es2017"
-    ],
+    "lib": ["dom", "es2017"],
     "module": "esnext",
     "moduleResolution": "node",
     "noEmit": true,
@@ -22,16 +19,7 @@
     "incremental": true,
     "jsx": "preserve"
   },
-  "exclude": [
-    "node_modules",
-    ".next"
-  ],
-  "typeRoots": [
-    "./../../types",
-    "./../../node_modules/@types"
-  ],
-  "include": [
-    "**/*.tsx",
-    "./../../types"
-  ]
+  "exclude": ["node_modules", ".next"],
+  "typeRoots": ["./../../types", "./../../node_modules/@types"],
+  "include": ["**/*.tsx", "./../../types"]
 }

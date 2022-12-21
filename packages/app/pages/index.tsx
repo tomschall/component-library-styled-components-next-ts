@@ -1,12 +1,12 @@
-import React from 'react'
-import { Button } from 'shared-ui/dist'
+import React from 'react';
+import { Button } from 'shared-ui/dist';
 import {
   Mumble,
   Cancel,
   Calendar,
   Checkmark,
-} from 'shared-ui/components/icons/components'
-import tw from 'twin.macro'
+} from 'shared-ui/components/icons/components';
+import tw from 'twin.macro';
 
 const App = () => {
   return (
@@ -24,7 +24,7 @@ const App = () => {
       <Checkmark width={100} height={100} css={tw`fill-violet-600`} />
       <p css={tw`text-pink-600 text-3xl`}>Hello World</p>
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;
