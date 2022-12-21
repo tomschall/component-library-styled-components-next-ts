@@ -63,6 +63,7 @@ export const Mumble: React.FC<IMumbleProps> = ({
     alt: 'This is a profile picture!',
     fCallBack: () => {},
     src: '',
+    loading: false,
   },
   comment = {
     fCallBack: () => {},
@@ -107,6 +108,7 @@ export const Mumble: React.FC<IMumbleProps> = ({
               alt={img.alt}
               fCallBack={img.fCallBack}
               src={img.src}
+              loading={img.loading}
             />
           </Row>
           <Row>
@@ -152,6 +154,7 @@ export const Mumble: React.FC<IMumbleProps> = ({
               alt={img.alt}
               fCallBack={img.fCallBack}
               src={img.src}
+              loading={img.loading}
             />
           </Row>
           <Row>
@@ -189,6 +192,7 @@ export const Mumble: React.FC<IMumbleProps> = ({
               alt={img.alt}
               fCallBack={img.fCallBack}
               src={img.src}
+              loading={img.loading}
             />
           </Row>
           <Row>

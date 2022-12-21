@@ -10,7 +10,7 @@ import {
 
 export interface IInteractionButton
   extends React.HtmlHTMLAttributes<HTMLButtonElement> {
-  type: 'like' | 'comment';
+  type?: 'like' | 'comment';
   quantity?: number;
   favourite?: boolean;
   fCallBack?: () => void;

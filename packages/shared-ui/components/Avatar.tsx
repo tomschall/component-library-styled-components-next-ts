@@ -1,3 +1,4 @@
+import React from 'react';
 import tw from 'twin.macro';
 import styled from 'styled-components';
 import { IconButton } from '../components/buttons/IconButton';
@@ -6,7 +7,7 @@ export interface IAvatarProps
   extends React.HtmlHTMLAttributes<HTMLImageElement> {
   src: string;
   alt: string;
-  variant: 'small' | 'medium' | 'large' | 'xlarge' | 'edit';
+  variant?: 'small' | 'medium' | 'large' | 'xlarge' | 'edit';
   fCallBack?: () => void;
 }
 

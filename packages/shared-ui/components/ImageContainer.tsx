@@ -9,7 +9,7 @@ export interface IImageContainerProps
   alt: string;
   fCallBack?: () => void;
   icon?: 'fullscreen' | 'edit' | 'repost';
-  loading?: boolean | false;
+  loading?: boolean;
 }
 
 export const ImageContainer: React.FC<IImageContainerProps> = ({
@@ -34,13 +34,7 @@ export const ImageContainer: React.FC<IImageContainerProps> = ({
           </ImageIcon>
         </Container>
       </Wrapper>
-      <Image
-        alt={alt}
-        src={src}
-        loading={'lazy'}
-        width={'680px'}
-        height={'320px'}
-      />
+      <Image alt={alt} src={src} width={'680px'} height={'320px'} />
     </Figure>
   );
 };
@@ -104,7 +98,7 @@ const ImageIcon = styled.div(({ loading, icon }: IImageIcon) => [
     ease-in-out
     z-50
 `,
-  loading === true && icon === 'repost' && LoadingSpinner,
+  loading === true && icon === 'repost' ? LoadingSpinner : ``,
 ]);
 
 const Wrapper = styled.div(({ loading, icon }: IImageIcon) => [
@@ -125,7 +119,7 @@ const Wrapper = styled.div(({ loading, icon }: IImageIcon) => [
     -translate-x-1/2 
     -translate-y-1/2
 	`,
-  loading === true && icon === 'repost' && tw`opacity-100`,
+  loading === true && icon === 'repost' ? tw`opacity-100` : ``,
 ]);
 
 const Figure = styled.figure(() => [
