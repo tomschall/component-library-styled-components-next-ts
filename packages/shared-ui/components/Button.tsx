@@ -1,6 +1,5 @@
 import React from 'react'
 import tw, { css, styled } from 'twin.macro'
-import { Mumble } from './icons/components'
 import { Icons, IconTypes } from './icons/IconMap'
 
 export interface IButtonProps
