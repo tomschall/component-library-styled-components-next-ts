@@ -15,6 +15,6 @@ export * from './Avatar';
 export * from './IconLink';
 export * from './ImageContainer';
 export * from './Input';
-export { Mumble as MumbleItem } from './Mumble';
+export * from './Mumble';
 export * from './Navigation';
 export * from './User';
