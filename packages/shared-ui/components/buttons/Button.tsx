@@ -31,19 +31,17 @@ export const Button: React.FC<IButtonProps> = ({
   });
 
   return (
-    <>
-      <ButtonStyles
-        variant={variant}
-        size={size}
-        width={width}
-        type={type}
-        disabled={disabled}
-        onClick={handleClick}
-      >
-        {label}
-        {Icon}
-      </ButtonStyles>
-    </>
+    <StyledButton
+      variant={variant}
+      size={size}
+      width={width}
+      type={type}
+      disabled={disabled}
+      onClick={handleClick}
+    >
+      {label}
+      {Icon}
+    </StyledButton>
   );
 };
 
@@ -131,7 +129,7 @@ const IconMargin = css`
   }
 `;
 
-const ButtonStyles = styled.button(({ variant, width, size }: ButtonProps) => [
+const StyledButton = styled.button(({ variant, width, size }: ButtonProps) => [
   buttonFont,
   buttonDefaults,
   buttonHover,
