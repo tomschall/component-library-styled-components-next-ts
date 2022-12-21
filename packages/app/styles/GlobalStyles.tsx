@@ -4,9 +4,10 @@ import tw, { theme, GlobalStyles as BaseStyles } from 'twin.macro';
 
 const CustomStyles = createGlobalStyle({
   body: {
-    color: 'white',
-    WebkitTapHighlightColor: theme`colors.purple.500`,
-    ...tw`antialiased`,
+    // color: 'white',
+    // WebkitTapHighlightColor: theme`colors.purple.500`,
+    // ...tw`antialiased`,
+    fontFamily: 'var(--font-family-base)',
   },
 });
 

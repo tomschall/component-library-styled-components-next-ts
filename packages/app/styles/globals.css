@@ -1,7 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
 
 :root {
   /*
@@ -37,7 +34,7 @@
 }
 
 body {
-  font-family: var(--font-family-base);
+  /* font-family: var(--font-family-base); */
   font-size: var(--font-size-base);
   font-weight: var(--font-weight);
   font-style: var(--font-style);
