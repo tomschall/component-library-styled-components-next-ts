@@ -1,6 +1,6 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { MumbleLogo } from '../../components/icons/MumbleLogo';
-import { DefaultLayout } from '../../components/layouts/DefaultLayout';
+import { DefaultLayout } from '../layouts/DefaultLayout';
 import { ISVGProps } from '../../interfaces/SVG';
 import React from 'react';
 

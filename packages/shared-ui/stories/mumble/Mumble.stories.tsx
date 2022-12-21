@@ -1,7 +1,7 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { Mumble } from '../../components/Mumble';
-import { DefaultLayout } from '../../components/layouts/DefaultLayout';
+import { DefaultLayout } from '../layouts/DefaultLayout';
 
 export default {
   title: 'Mumble/Mumble',

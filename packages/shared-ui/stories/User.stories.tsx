@@ -1,7 +1,7 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { User } from '../components/User';
-import { DefaultLayout } from '../components/layouts/DefaultLayout';
+import { DefaultLayout } from './layouts/DefaultLayout';
 
 export default {
   title: 'User/User',

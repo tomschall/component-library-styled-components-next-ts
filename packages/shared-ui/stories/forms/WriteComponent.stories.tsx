@@ -1,7 +1,7 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { WriteComponent } from '../../components/forms/WriteComponent';
-import { DefaultLayout } from '../../components/layouts/DefaultLayout';
+import { DefaultLayout } from '../layouts/DefaultLayout';
 
 export default {
   title: 'Write-Component/Inline',

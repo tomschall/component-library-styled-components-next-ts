@@ -1,6 +1,6 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { DefaultLayout } from '../components/layouts/DefaultLayout';
+import { DefaultLayout } from './layouts/DefaultLayout';
 import { ImageContainer } from '../components/ImageContainer';
 
 export default {

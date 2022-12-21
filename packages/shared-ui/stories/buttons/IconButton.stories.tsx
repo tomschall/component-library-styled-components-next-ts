@@ -2,7 +2,7 @@ import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { IconButton } from '../../components/buttons/IconButton';
 import { Icons } from '../../components/icons/IconMap';
-import { DefaultLayout } from '../../components/layouts/DefaultLayout';
+import { DefaultLayout } from '../layouts/DefaultLayout';
 
 export default {
   title: 'Interactions/IconButton',

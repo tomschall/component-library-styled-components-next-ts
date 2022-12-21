@@ -1,18 +1,19 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { IconTemplate } from '../../components/layouts/IconGrid';
+import { IconTemplate } from '../layouts/IconGrid';
 import { Settings } from '../../components/icons/components';
 import { Icons, IconTypes } from '../../components/icons/IconMap';
 import { Heading } from '../../components/typography/Heading';
 import { Paragraph } from '../../components/typography/Paragraph';
+import tw, { TwStyle } from 'twin.macro';
 import React from 'react';
 
-let tailWindColors: string[] = [
-  'fill-slate-500',
-  'fill-violet-500',
-  'fill-pink-500',
+let tailWindColors: any[] = [
+  tw`fill-slate-500`,
+  tw`fill-violet-500`,
+  tw`fill-pink-500`,
 ];
 
-let tailWindColorsElement: string = '';
+let tailWindColorsElement: TwStyle = tw`fill-slate-500`;
 
 export default {
   title: 'Icons/Collection',
@@ -25,9 +26,13 @@ export default {
   },
 } as ComponentMeta<typeof Settings>;
 
+const GridDiv = tw.div`grid sm:grid-rows-6 grid-cols-1 sm:grid-cols-3 md:grid-cols-5 gap-32 p-24`; // todo grid-rows-12 fehlt ??
+
+const Col = tw.div`flex flex-col justify-center items-center pt-24 w-full`;
+
 const TemplateIcon: ComponentStory<typeof Settings | any> = () => (
   <>
-    <div className="flex flex-col justify-center items-center  pt-24 w-full">
+    <Col>
       <Heading
         tag="h1"
         title={'ICONS'}
@@ -36,14 +41,14 @@ const TemplateIcon: ComponentStory<typeof Settings | any> = () => (
         variant="default"
       />
       <Paragraph text="THE MUMBLE ICON COLLECTION" color={'white'} />
-      <div className="grid grid-rows-12 sm:grid-rows-6 grid-cols-1 sm:grid-cols-3 md:grid-cols-5 gap-32 p-24">
+      <GridDiv>
         {Object.keys(Icons).map((iconType, index) => {
           tailWindColorsElement = tailWindColors.shift() || '';
 
           const Icon = React.cloneElement(
             Icons[iconType as IconTypes] || Icons['settings'],
             {
-              className: tailWindColorsElement,
+              fill: tailWindColorsElement.fill,
               width: 'auto',
               height: 'auto',
               iconName: iconType,
@@ -53,14 +58,12 @@ const TemplateIcon: ComponentStory<typeof Settings | any> = () => (
           tailWindColors.push(tailWindColorsElement);
           console.log(Icon);
 
+          const IconCol = tw.div`cursor-pointer flex flex-col justify-center items-center w-auto border-1 border-slate-800 bg-slate-800 p-16 hover:scale-105 hover:rotate-3 hover:bg-slate-800 hover:border-slate-700 rounded-16`;
+          const IconFlex = tw.div`flex justify-center items-center h-70 p-16 w-full mb-8 hover:scale-150 hover:-rotate-12 hover:animate-pulse transform-gpu translate-y-4 transition duration-300 ease-in-out`;
+
           return (
-            <div
-              className="cursor-pointer flex flex-col justify-center items-center w-auto border-1 border-slate-800 bg-slate-800 p-16 hover:scale-105 hover:border-3 hover:rotate-3 hover:bg-slate-800 hover:border-slate-700 rounded-16"
-              key={index}
-            >
-              <div className="flex justify-center items-center h-70 p-16 w-full mb-8 hover:scale-150 hover:-rotate-12 hover:animate-pulse display:fade-in transform-gpu translate-y-4 transition duration-300 ease-in-out">
-                {Icon}
-              </div>
+            <IconCol key={index}>
+              <IconFlex>{Icon}</IconFlex>
               <Heading
                 tag="h3"
                 title={iconType}
@@ -69,28 +72,25 @@ const TemplateIcon: ComponentStory<typeof Settings | any> = () => (
                 variant="small"
                 className="text-justify font-semibold hover:text-slate-white"
               />
-            </div>
+            </IconCol>
           );
         })}
-      </div>
-    </div>
+      </GridDiv>
+    </Col>
   </>
 );
 
 const TemplateIconSingle: ComponentStory<any> = (args) => {
   const Icon = React.cloneElement(Icons[args.iconName as IconTypes], {
-    className: args.iconColor,
+    fill: args.iconColor.fill,
     width: args.iconWidth,
     height: args.iconHeight,
     iconName: 'mumble',
   });
-  return (
-    <>
-      <div className="grid grid-rows-4 grid-flow-col gap-4">
-        <div>{Icon}</div>
-      </div>
-    </>
-  );
+
+  const Div = tw.div`grid grid-rows-4 grid-flow-col gap-4`;
+
+  return <Div>{Icon}</Div>;
 };
 
 export const All = TemplateIcon.bind({});
@@ -101,7 +101,7 @@ export const Single = TemplateIconSingle.bind({});
 
 Single.args = {
   iconName: 'heart-outlined',
-  iconColor: 'fill-pink-500',
+  iconColor: tw`fill-pink-500`,
   iconWidth: '300px',
   iconHeight: '300px',
 };
