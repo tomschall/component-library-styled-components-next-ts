@@ -1,35 +1,144 @@
-import tw, { css, styled, theme } from 'twin.macro'
+import React from 'react'
+import tw, { css, styled } from 'twin.macro'
+import { Mumble } from './icons/components'
+import { Icons, IconTypes } from './icons/IconMap'
 
-interface ButtonProps {
-  variant?: 'primary' | 'secondary'
-  isSmall?: boolean
+export interface IButtonProps
+  extends React.HtmlHTMLAttributes<HTMLButtonElement> {
+  label: string
+  variant?: 'slate' | 'violet' | 'pink'
+  size?: 'small' | 'large'
+  width?: 'default' | 'large' | 'full'
+  type?: 'button' | 'reset' | 'submit'
+  disabled?: boolean
+  handleClick?: () => void
+  icon: IconTypes
 }
 
-const Button = styled.button(({ variant, isSmall }: ButtonProps) => [
-  // The common button styles
-  tw`px-8 py-2 rounded transform duration-75`,
+export const Button: React.FC<IButtonProps> = ({
+  label = 'Button Label',
+  variant = 'slate',
+  type = 'button',
+  size = 'small',
+  width = 'default',
+  disabled = false,
+  handleClick,
+  icon = 'mumble',
+}) => {
+  const styles = tw`fill-slate-white`
 
-  // Use the variant grouping feature to add variants to multiple classes
-  tw`hocus:(scale-105 text-yellow-400)`,
+  const Icon = React.cloneElement(Object(Icons[icon]), {
+    fill: styles.fill,
+  })
 
-  // Use props to conditionally style your components
-  variant === 'primary' && tw`bg-black text-white border-black`,
+  return (
+    <>
+      <ButtonStyles
+        variant={variant}
+        size={size}
+        width={width}
+        type={type}
+        disabled={disabled}
+        onClick={handleClick}
+      >
+        {label}
+        {Icon}
+      </ButtonStyles>
+    </>
+  )
+}
 
-  // Combine regular css with tailwind classes within backticks
-  variant === 'secondary' && [
-    css`
-      box-shadow: 0 0.1em 0 0 rgba(0, 0, 0, 0.25);
-    `,
-    tw`border-2 border-yellow-600`,
-  ],
+interface ButtonProps {
+  variant?: string
+  width?: string
+  size?: string
+}
 
-  // Conditional props can be added
-  isSmall ? tw`text-sm` : tw`text-lg`,
+/**
+ * @Button
+ * @desc Button styles
+ */
+const buttonFont = tw`
+  text-skin-light
+  font-semibold
+  leading-normal
+  whitespace-nowrap
+`
 
-  // The theme import can supply values from your tailwind.config.js
-  css`
-    color: ${theme`colors.white`};
-  `,
+const buttonDefaults = tw`
+  flex
+  grow-0
+  justify-center
+  items-center
+  p-12
+  rounded
+  w-auto
+  outline-none
+`
+
+const buttonHover = tw`
+  hover:(outline-3 outline-offset-0)
+`
+
+const buttonFocus = tw`
+  focus:(outline-4 outline-offset-0)
+`
+
+const variantSlate = tw`
+  bg-slate-600
+  hover:(bg-slate-700 outline-slate-100)
+  focus:(outline-slate-200)
+  disabled:bg-slate-300
+`
+
+const variantViolet = tw`
+  bg-violet-600
+  hover:(bg-violet-700 outline-violet-100)
+  focus:(outline-violet-200)
+  disabled:bg-violet-300
+`
+
+const variantPink = tw`
+  bg-gradient-to-r from-pink-500 to-violet-500
+  hover:(bg-gradient-to-r-70 outline-violet-100)
+  focus:(bg-gradient-to-r-80 outline-violet-200)
+  disabled:(bg-gradient-to-r)
+`
+
+const buttonWidth = (width: string | undefined) => [
+  width === 'default' ? null : tw`w-full`,
+  width === 'large' && tw`w-[184px] h-[40px]`,
+]
+
+const buttonSize = (size: string | undefined) =>
+  size === 'large' ? tw`py-16 px-24` : null
+
+const getVariant = (variant: string | undefined) => {
+  switch (variant) {
+    case 'slate':
+      return variantSlate
+    case 'violet':
+      return variantViolet
+    case 'pink':
+      return variantPink
+    default:
+      return variantSlate
+  }
+}
+
+const IconMargin = css`
+  svg {
+    margin-left: 8px;
+  }
+`
+
+const ButtonStyles = styled.button(({ variant, width, size }: ButtonProps) => [
+  buttonFont,
+  buttonDefaults,
+  buttonHover,
+  buttonFocus,
+  buttonWidth(width),
+  buttonSize(size),
+  getVariant(variant),
+  IconMargin,
 ])
-
-export default Button

@@ -8,6 +8,7 @@
     "watch": "tsc --watch"
   },
   "dependencies": {
+    "@svgr/cli": "^6.5.1",
     "typescript": "^4.5.2"
   },
   "license": "MIT"

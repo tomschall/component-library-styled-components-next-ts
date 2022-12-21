@@ -1,24 +1,30 @@
 import React from 'react'
+import { Button } from 'shared-ui/components'
+import {
+  Mumble,
+  Cancel,
+  Calendar,
+  Checkmark,
+} from 'shared-ui/components/icons/components'
 import tw from 'twin.macro'
-import { Logo, Button } from 'shared-ui'
 
-const styles = {
-  // Move long class sets out of jsx to keep it scannable
-  container: ({ hasBackground }: { hasBackground: boolean }) => [
-    tw`flex flex-col items-center justify-center h-screen`,
-    hasBackground && tw`bg-gradient-to-b from-electric to-ribbon`,
-  ],
-}
-
-const App = () => (
-  <div css={styles.container({ hasBackground: true })}>
-    <div tw="flex flex-col justify-center h-full gap-y-5">
-      <Button variant="primary">Submit</Button>
-      <Button variant="secondary">Cancel</Button>
-      <Button isSmall>Close</Button>
+const App = () => {
+  return (
+    <div>
+      <Button
+        variant="pink"
+        size="small"
+        label="Roli Chicken Fest"
+        icon="mumble"
+        width="default"
+      />
+      <Mumble width={100} height={100} css={tw`fill-violet-600`} />
+      <Calendar width={100} height={100} css={tw`fill-violet-600`} />
+      <Cancel width={100} height={100} css={tw`fill-violet-600`} />
+      <Checkmark width={100} height={100} css={tw`fill-violet-600`} />
+      <p css={tw`text-pink-600 text-3xl`}>Hello World</p>
     </div>
-    <Logo />
-  </div>
-)
+  )
+}
 
 export default App
