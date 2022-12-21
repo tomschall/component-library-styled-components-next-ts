@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button } from 'shared-ui/components'
+import { Button } from 'shared-ui/dist'
 import {
   Mumble,
   Cancel,
@@ -13,7 +13,7 @@ const App = () => {
     <div>
       <Button
         variant="pink"
-        size="small"
+        size="large"
         label="Roli Chicken Fest"
         icon="mumble"
         width="default"
