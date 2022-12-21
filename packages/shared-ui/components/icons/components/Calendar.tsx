@@ -1,5 +1,5 @@
-import * as React from 'react'
-import { SVGProps } from 'react'
+import * as React from 'react';
+import { SVGProps } from 'react';
 const SvgCalendar = (props: SVGProps<SVGSVGElement>) => (
   <svg
     width="16px"
@@ -18,5 +18,5 @@ const SvgCalendar = (props: SVGProps<SVGSVGElement>) => (
       </clipPath>
     </defs>
   </svg>
-)
-export default SvgCalendar
+);
+export default SvgCalendar;

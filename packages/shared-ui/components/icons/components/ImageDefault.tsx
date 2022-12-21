@@ -1,5 +1,5 @@
-import * as React from 'react'
-import { SVGProps } from 'react'
+import * as React from 'react';
+import { SVGProps } from 'react';
 const SvgImageDefault = (props: SVGProps<SVGSVGElement>) => (
   <svg
     width="16px"
@@ -11,5 +11,5 @@ const SvgImageDefault = (props: SVGProps<SVGSVGElement>) => (
   >
     <path fill="#DDD6FE" d="M-5-4h529v328H-5z" />
   </svg>
-)
-export default SvgImageDefault
+);
+export default SvgImageDefault;

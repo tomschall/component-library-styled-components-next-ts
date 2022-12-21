@@ -155,4 +155,4 @@ module.exports = {
       strategy: 'class', // only generate global styles
     }),
   ],
-}
+};

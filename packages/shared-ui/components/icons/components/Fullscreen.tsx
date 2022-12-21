@@ -1,5 +1,5 @@
-import * as React from 'react'
-import { SVGProps } from 'react'
+import * as React from 'react';
+import { SVGProps } from 'react';
 const SvgFullscreen = (props: SVGProps<SVGSVGElement>) => (
   <svg
     width="16px"
@@ -18,5 +18,5 @@ const SvgFullscreen = (props: SVGProps<SVGSVGElement>) => (
       </clipPath>
     </defs>
   </svg>
-)
-export default SvgFullscreen
+);
+export default SvgFullscreen;

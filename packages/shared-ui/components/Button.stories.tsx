@@ -1,13 +1,13 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react'
-import React from 'react'
-import { Button } from '../components/Button'
-import { Icons } from '../components/icons/IconMap'
-import { DefaultLayout } from '../components/layouts/DefaultLayout'
+import { ComponentStory, ComponentMeta } from '@storybook/react';
+import React from 'react';
+import { Button } from './Button';
+import { Icons } from './icons/IconMap';
+import { DefaultLayout } from './layouts/DefaultLayout';
 
 export default {
   title: 'Interactions',
   component: Button,
-  decorators: [story => <DefaultLayout>{story()}</DefaultLayout>],
+  decorators: [(story) => <DefaultLayout>{story()}</DefaultLayout>],
   argTypes: {
     label: {
       name: 'label',
@@ -53,22 +53,22 @@ export default {
       defaultValue: 'settings',
     },
   },
-} as ComponentMeta<typeof Button>
+} as ComponentMeta<typeof Button>;
 
-const Template: ComponentStory<typeof Button> = args => {
-  return <Button {...args} />
-}
+const Template: ComponentStory<typeof Button> = (args) => {
+  return <Button {...args} />;
+};
 
 /**
  * @button
  * @desc button standard slate
  */
-export const ButtonVariants = Template.bind({})
+export const ButtonVariants = Template.bind({});
 
 ButtonVariants.parameters = {
   docs: {
     source: { type: 'dynamic' },
   },
-}
+};
 
-ButtonVariants.storyName = 'Button'
+ButtonVariants.storyName = 'Button';

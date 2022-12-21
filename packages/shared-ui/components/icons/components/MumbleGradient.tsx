@@ -1,5 +1,5 @@
-import * as React from 'react'
-import { SVGProps } from 'react'
+import * as React from 'react';
+import { SVGProps } from 'react';
 const SvgMumbleGradient = (props: SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -29,5 +29,5 @@ const SvgMumbleGradient = (props: SVGProps<SVGSVGElement>) => (
       }}
     />
   </svg>
-)
-export default SvgMumbleGradient
+);
+export default SvgMumbleGradient;

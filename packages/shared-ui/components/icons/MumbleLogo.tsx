@@ -1,17 +1,17 @@
-import styled, { css } from 'styled-components'
-import tw from 'twin.macro'
-import { MumbleText, MumbleGradient, LogoMumble } from './components'
+import styled, { css } from 'styled-components';
+import tw from 'twin.macro';
+import { MumbleText, MumbleGradient, LogoMumble } from './components';
 
 export interface IMumbleLogoProps
   extends React.HTMLAttributes<HTMLOrSVGImageElement> {
-  title: string
-  href: string
-  variant: 'violet' | 'gradient' | 'white'
-  alignment: 'horizontal' | 'vertical'
-  iconColor: string | undefined
-  iconWidth?: string | undefined
-  iconHeight?: string | undefined
-  fCallBack?: () => void
+  title: string;
+  href: string;
+  variant: 'violet' | 'gradient' | 'white';
+  alignment: 'horizontal' | 'vertical';
+  iconColor: string | undefined;
+  iconWidth?: string | undefined;
+  iconHeight?: string | undefined;
+  fCallBack?: () => void;
 }
 
 export const MumbleLogo: React.FC<IMumbleLogoProps> = ({
@@ -38,12 +38,12 @@ export const MumbleLogo: React.FC<IMumbleLogoProps> = ({
         {variant === 'gradient' && <MumbleGradient className={iconColor} />}
       </MumbleLogoStyled>
     </>
-  )
-}
+  );
+};
 
 interface IMumbleLogoStyled {
-  alignment: string
-  variant: string
+  alignment: string;
+  variant: string;
 }
 
 const MumbleLogoStyled = styled.a(
@@ -95,4 +95,4 @@ const MumbleLogoStyled = styled.a(
       }
     `,
   ],
-)
+);

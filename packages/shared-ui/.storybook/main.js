@@ -1,4 +1,4 @@
-const path = require('path')
+const path = require('path');
 
 module.exports = {
   stories: ['../**/*.stories.mdx', '../**/*.stories.@(js|jsx|ts|tsx)'],
@@ -12,10 +12,10 @@ module.exports = {
   core: {
     builder: '@storybook/builder-webpack5',
   },
-  webpackFinal: async config => {
+  webpackFinal: async (config) => {
     config.module.rules
-      .filter(rule => rule.test?.test('.svg'))
-      .forEach(rule => (rule.exclude = /\.svg$/i))
+      .filter((rule) => rule.test?.test('.svg'))
+      .forEach((rule) => (rule.exclude = /\.svg$/i));
 
     config.module.rules.push({
       test: /\,css&/,
@@ -29,8 +29,8 @@ module.exports = {
         },
       ],
       include: path.resolve(__dirname, '../'),
-    })
+    });
 
-    return config
+    return config;
   },
-}
+};

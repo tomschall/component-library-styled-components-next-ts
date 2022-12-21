@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import {
   Calendar,
   Cancel,
@@ -27,7 +27,7 @@ import {
   Time,
   Up,
   Upload,
-} from './components'
+} from './components';
 
 export const Icons = {
   calendar: <Calendar />,
@@ -57,11 +57,11 @@ export const Icons = {
   time: <Time />,
   up: <Up />,
   upload: <Upload />,
-}
+};
 
 export const LikeRepostIcons = {
   HeartFilled: <HeartFilled />,
   ReplyFilled: <ReplyFilled />,
-}
+};
 
-export type IconTypes = keyof typeof Icons
+export type IconTypes = keyof typeof Icons;

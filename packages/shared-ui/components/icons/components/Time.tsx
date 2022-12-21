@@ -1,5 +1,5 @@
-import * as React from 'react'
-import { SVGProps } from 'react'
+import * as React from 'react';
+import { SVGProps } from 'react';
 const SvgTime = (props: SVGProps<SVGSVGElement>) => (
   <svg
     width="16px"
@@ -19,5 +19,5 @@ const SvgTime = (props: SVGProps<SVGSVGElement>) => (
       </clipPath>
     </defs>
   </svg>
-)
-export default SvgTime
+);
+export default SvgTime;
