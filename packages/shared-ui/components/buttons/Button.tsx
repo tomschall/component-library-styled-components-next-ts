@@ -1,6 +1,6 @@
 import React from 'react';
 import tw, { css, styled } from 'twin.macro';
-import { Icons, IconTypes } from './icons/IconMap';
+import { Icons, IconTypes } from '../icons/IconMap';
 
 export interface IButtonProps
   extends React.HtmlHTMLAttributes<HTMLButtonElement> {
@@ -27,7 +27,7 @@ export const Button: React.FC<IButtonProps> = ({
   const styles = tw`fill-slate-white`;
 
   const Icon = React.cloneElement(Object(Icons[icon]), {
-    fill: styles.fill,
+    ...styles,
   });
 
   return (
