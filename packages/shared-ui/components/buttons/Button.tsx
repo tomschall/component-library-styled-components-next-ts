@@ -22,7 +22,7 @@ export const Button: React.FC<IButtonProps> = ({
   width = 'default',
   disabled = false,
   handleClick,
-  icon = 'mumble',
+  icon = 'logo',
 }) => {
   const styles = tw`fill-slate-white`;
 

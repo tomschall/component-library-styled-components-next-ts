@@ -18,7 +18,7 @@ export const NaviButton: React.FC<INaviButtonProps> = ({
   variant = 'default',
   disabled = false,
   fCallBack,
-  icon = 'mumble',
+  icon = 'logo',
 }) => {
   const styles = tw`fill-slate-white`;
 

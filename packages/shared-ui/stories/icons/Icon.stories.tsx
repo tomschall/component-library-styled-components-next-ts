@@ -85,7 +85,7 @@ const TemplateIconSingle: ComponentStory<any> = (args) => {
     fill: args.iconColor.fill,
     width: args.iconWidth,
     height: args.iconHeight,
-    iconName: 'mumble',
+    iconName: 'logo',
   });
 
   const Div = tw.div`grid grid-rows-4 grid-flow-col gap-4`;

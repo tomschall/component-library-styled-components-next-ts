@@ -152,7 +152,7 @@ export const User: React.FC<IUserProps> = ({
             </div>
             <Button
               handleClick={btn?.fCallBack}
-              icon="mumble"
+              icon="logo"
               label={btn?.label}
               size="small"
               type="button"
