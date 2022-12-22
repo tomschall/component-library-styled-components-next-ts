@@ -29,11 +29,11 @@ export const MumbleLogo: React.FC<IMumbleLogoProps> = ({
 
     switch (variant) {
       case 'violet':
-        hoverColor = tw`fill-violet-900`;
+        hoverColor = tw`fill-violet-600`;
         defaultColor = tw`fill-violet-600`;
         return hover ? hoverColor : defaultColor;
       case 'gradient':
-        hoverColor = tw`fill-violet-900`;
+        hoverColor = tw`fill-violet-600`;
         defaultColor = tw`fill-violet-600`;
         return hover ? hoverColor : defaultColor;
       case 'white':
