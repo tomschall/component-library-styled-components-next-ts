@@ -26,7 +26,7 @@ export const Mumble: React.FC<IMumbleProps> = ({
   variant = 'detailpage',
   user = {
     avatar: {
-      alt: 'avatar',
+      alt: 'user avatar',
       src: 'https://i.stack.imgur.com/5xd5n.png',
       fCallBack: () => {},
     },
@@ -53,7 +53,7 @@ export const Mumble: React.FC<IMumbleProps> = ({
     },
   },
   avatar = {
-    alt: 'Alter Tag',
+    alt: 'avatar',
     src: 'https://i.stack.imgur.com/5xd5n.png',
     variant: 'medium',
     fCallBack: () => {},
@@ -83,12 +83,10 @@ export const Mumble: React.FC<IMumbleProps> = ({
       {variant === 'detailpage' && (
         <Article>
           <User
-            avatar={user.avatar}
             btn={user.btn}
             joined={user.joined}
             label={user.label}
             location={user.location}
-            timestamp={user.timestamp}
             username={user.username}
             variant="xlarge"
           />
@@ -129,11 +127,8 @@ export const Mumble: React.FC<IMumbleProps> = ({
       {variant === 'timeline' && (
         <Article>
           <User
-            avatar={user.avatar}
             btn={user.btn}
-            joined={user.joined}
             label={user.label}
-            location={user.location}
             timestamp={user.timestamp}
             username={user.username}
             variant="large"
@@ -177,9 +172,7 @@ export const Mumble: React.FC<IMumbleProps> = ({
           <User
             avatar={user.avatar}
             btn={user.btn}
-            joined={user.joined}
             label={user.label}
-            location={user.location}
             timestamp={user.timestamp}
             username={user.username}
             variant="small"

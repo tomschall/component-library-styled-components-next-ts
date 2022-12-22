@@ -56,7 +56,6 @@ const TemplateIcon: ComponentStory<typeof Settings | any> = () => (
           );
 
           tailWindColors.push(tailWindColorsElement);
-          console.log(Icon);
 
           const IconCol = tw.div`cursor-pointer flex flex-col justify-center items-center w-auto border-1 border-slate-800 bg-slate-800 p-16 hover:scale-105 hover:rotate-3 hover:bg-slate-800 hover:border-slate-700 rounded-16`;
           const IconFlex = tw.div`flex justify-center items-center h-70 p-16 w-full mb-8 hover:scale-150 hover:-rotate-12 hover:animate-pulse transform-gpu translate-y-4 transition duration-300 ease-in-out`;

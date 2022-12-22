@@ -28,16 +28,19 @@ export const IconLink: React.FC<IIconLinkProps> = ({
   const [hover, setHover] = useState(false);
 
   const iconColor = () => {
-    if (variant === 'slate') {
-      const hoverColor: TwStyle = tw`fill-slate-600`;
-      const defaultColor: TwStyle = tw`fill-slate-400`;
-      return hover ? hoverColor : defaultColor;
-    } else if (variant === 'violet') {
-      const hoverColor: TwStyle = tw`fill-violet-900`;
-      const defaultColor: TwStyle = tw`fill-violet-600`;
-      return hover ? hoverColor : defaultColor;
+    let hoverColor: TwStyle;
+    let defaultColor: TwStyle;
+
+    switch (variant) {
+      case 'slate':
+        hoverColor = tw`fill-slate-600`;
+        defaultColor = tw`fill-slate-400`;
+        return hover ? hoverColor : defaultColor;
+      case 'violet':
+        hoverColor = tw`fill-violet-900`;
+        defaultColor = tw`fill-violet-600`;
+        return hover ? hoverColor : defaultColor;
     }
-    return null;
   };
 
   const getIcon = () => {

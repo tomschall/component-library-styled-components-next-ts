@@ -1,14 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
-import tw from 'twin.macro';
-import { Icons } from '../components/icons/IconMap';
+import tw, { TwStyle } from 'twin.macro';
+import { Fullscreen, Edit, Repost } from './icons/components';
 
 export interface IImageContainerProps
   extends React.HtmlHTMLAttributes<HTMLImageElement> {
   src?: string;
   alt: string;
   fCallBack?: () => void;
-  icon?: 'fullscreen' | 'edit' | 'repost';
+  type?: 'fullscreen' | 'edit' | 'repost';
   loading?: boolean;
 }
 
@@ -16,21 +16,29 @@ export const ImageContainer: React.FC<IImageContainerProps> = ({
   src = '',
   alt = '',
   fCallBack,
-  icon = 'fullscreen',
+  type = 'fullscreen',
   loading = false,
 }) => {
-  const Icon = React.cloneElement(Object(Icons[icon]), {
-    className: 'fill-slate-white',
-    width: 'auto',
-    height: 'auto',
-  });
+  const getIcon = () => {
+    const color: TwStyle = tw`fill-slate-white`;
+    const styles: TwStyle = tw`w-full h-full`;
+
+    switch (type) {
+      case 'fullscreen':
+        return <Fullscreen style={styles} fill={color?.fill as string} />;
+      case 'edit':
+        return <Edit style={styles} fill={color?.fill as string} />;
+      case 'repost':
+        return <Repost style={styles} fill={color?.fill as string} />;
+    }
+  };
 
   return (
     <Figure className="group">
-      <Wrapper loading={loading} icon={icon}>
+      <Wrapper loading={loading} type={type}>
         <Container>
-          <ImageIcon loading={loading} onClick={fCallBack} icon={icon}>
-            {Icon}
+          <ImageIcon loading={loading} onClick={fCallBack} type={type}>
+            {getIcon()}
           </ImageIcon>
         </Container>
       </Wrapper>
@@ -41,7 +49,7 @@ export const ImageContainer: React.FC<IImageContainerProps> = ({
 
 interface IImageIcon {
   loading: boolean;
-  icon: string;
+  type: string;
 }
 
 const Image = styled.img(() => [
@@ -54,7 +62,6 @@ const Image = styled.img(() => [
     transition
     duration-300
     ease-in-out
-
     group-hover:scale-110
     group-hover:opacity-20
   `,
@@ -69,7 +76,6 @@ const Container = styled.div(() => [
   transition
   duration-100
   ease-in-out
-
   group-hover:translate-y-0
 `,
 ]);
@@ -85,7 +91,7 @@ const LoadingSpinner = tw`
   opacity-50
 `;
 
-const ImageIcon = styled.div(({ loading, icon }: IImageIcon) => [
+const ImageIcon = styled.div(({ loading, type }: IImageIcon) => [
   tw`
     flex
     justify-center
@@ -98,15 +104,14 @@ const ImageIcon = styled.div(({ loading, icon }: IImageIcon) => [
     ease-in-out
     z-50
 `,
-  loading === true && icon === 'repost' ? LoadingSpinner : ``,
+  loading === true && type === 'repost' ? LoadingSpinner : ``,
 ]);
 
-const Wrapper = styled.div(({ loading, icon }: IImageIcon) => [
+const Wrapper = styled.div(({ loading, type }: IImageIcon) => [
   tw`
 		rounded-xl
     z-50
     opacity-0
-
     group-hover:opacity-100
     transition
     duration-300
@@ -119,7 +124,7 @@ const Wrapper = styled.div(({ loading, icon }: IImageIcon) => [
     -translate-x-1/2 
     -translate-y-1/2
 	`,
-  loading === true && icon === 'repost' ? tw`opacity-100` : ``,
+  loading === true && type === 'repost' ? tw`opacity-100` : ``,
 ]);
 
 const Figure = styled.figure(() => [
@@ -129,7 +134,6 @@ const Figure = styled.figure(() => [
     items-center
     w-full
     max-h-[320px]
-
     border-1
     border-slate-white
     overflow-hidden

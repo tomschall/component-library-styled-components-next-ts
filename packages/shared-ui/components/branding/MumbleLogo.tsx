@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import tw from 'twin.macro';
-import { MumbleText, MumbleGradient, LogoMumble } from './components';
+import { MumbleText, MumbleGradient, LogoMumble } from '../icons/components';
 
 export interface IMumbleLogoProps
   extends React.HTMLAttributes<HTMLOrSVGImageElement> {

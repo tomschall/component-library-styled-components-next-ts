@@ -7,7 +7,7 @@ export * from './buttons/TextButton';
 export * from './forms/Input';
 export * from './forms/WriteComponent';
 export * from './icons/components';
-export * from './icons/MumbleLogo';
+export * from './branding/MumbleLogo';
 export * from './typography/Heading';
 export * from './typography/Paragraph';
 export * from './typography/Typography';
