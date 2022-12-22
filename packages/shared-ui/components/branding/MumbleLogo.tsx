@@ -1,5 +1,6 @@
+import { useState } from 'react';
 import styled, { css } from 'styled-components';
-import tw from 'twin.macro';
+import tw, { TwStyle } from 'twin.macro';
 import { MumbleText, MumbleGradient, LogoMumble } from '../icons/components';
 
 export interface IMumbleLogoProps
@@ -8,7 +9,6 @@ export interface IMumbleLogoProps
   href: string;
   variant: 'violet' | 'gradient' | 'white';
   alignment: 'horizontal' | 'vertical';
-  iconColor: string | undefined;
   iconWidth?: string | undefined;
   iconHeight?: string | undefined;
   fCallBack?: () => void;
@@ -19,23 +19,80 @@ export const MumbleLogo: React.FC<IMumbleLogoProps> = ({
   href,
   variant,
   alignment,
-  iconColor,
   fCallBack,
 }: IMumbleLogoProps) => {
+  const [hover, setHover] = useState(false);
+
+  const iconColor = () => {
+    let hoverColor: TwStyle;
+    let defaultColor: TwStyle;
+
+    switch (variant) {
+      case 'violet':
+        hoverColor = tw`fill-violet-900`;
+        defaultColor = tw`fill-violet-600`;
+        return hover ? hoverColor : defaultColor;
+      case 'gradient':
+        hoverColor = tw`fill-pink-900`;
+        defaultColor = tw`fill-pink-600`;
+        return hover ? hoverColor : defaultColor;
+      case 'white':
+        hoverColor = tw`fill-slate-white`;
+        defaultColor = tw`fill-slate-white`;
+        return hover ? hoverColor : defaultColor;
+    }
+  };
+
+  const styles = tw`ml-16`;
+
+  const SvgStyles = () => {
+    switch (alignment) {
+      case 'horizontal':
+        return tw`w-[200px] h-[100%] min-w-[100px] mr-[10%] first-of-type:mr-12 first-of-type:w-64 first-of-type:min-w-[10%]` as TwStyle;
+      case 'vertical':
+        return tw`w-[200px] h-[100%] min-w-[100px] first-of-type:mr-12 first-of-type:w-64 first-of-type:min-w-[10%] mb-16` as TwStyle;
+    }
+  };
+
+  const TextSvgStyles = () => {
+    switch (alignment) {
+      case 'horizontal':
+        return tw`w-[200px] h-[100%] min-w-[100px] first-of-type:mr-12 first-of-type:w-64 first-of-type:min-w-[10%] ml-16` as TwStyle;
+      case 'vertical':
+        return tw`w-[200px] h-[100%] min-w-[100px] first-of-type:mr-12 first-of-type:w-64 first-of-type:min-w-[10%] mb-16 ml-16` as TwStyle;
+    }
+  };
+
   return (
     <>
       <MumbleLogoStyled
         title={title}
         href={href}
-        variant={variant}
         alignment={alignment}
         target={'_self'}
         onClick={fCallBack}
+        onMouseEnter={() => setHover(true)}
+        onMouseLeave={() => setHover(false)}
       >
-        <LogoMumble className={iconColor} />
-        {variant === 'violet' && <MumbleText className={iconColor} />}
-        {variant === 'white' && <MumbleText className={iconColor} />}
-        {variant === 'gradient' && <MumbleGradient className={iconColor} />}
+        <LogoMumble fill={iconColor().fill as string} style={SvgStyles()} />
+        {variant === 'violet' && (
+          <MumbleText
+            fill={iconColor().fill as string}
+            style={TextSvgStyles() as TwStyle}
+          />
+        )}
+        {variant === 'white' && (
+          <MumbleText
+            fill={iconColor().fill as string}
+            style={TextSvgStyles() as TwStyle}
+          />
+        )}
+        {variant === 'gradient' && (
+          <MumbleGradient
+            fill={iconColor().fill as string}
+            style={TextSvgStyles() as TwStyle}
+          />
+        )}
       </MumbleLogoStyled>
     </>
   );
@@ -43,56 +100,16 @@ export const MumbleLogo: React.FC<IMumbleLogoProps> = ({
 
 interface IMumbleLogoStyled {
   alignment: string;
-  variant: string;
 }
 
-const MumbleLogoStyled = styled.a(
-  ({ alignment, variant }: IMumbleLogoStyled) => [
-    tw`
+const MumbleLogoStyled = styled.a(({ alignment }: IMumbleLogoStyled) => [
+  tw`
     flex
     justify-between
     items-center
     p-0
     cursor-pointer
-    w-[200px]
-    min-w-[100px]
   `,
-    alignment === 'vertical' && tw`flex-col`,
-    alignment === 'vertical' &&
-      css`
-        svg {
-          margin-bottom: 16px;
-        }
-      `,
-    alignment === 'horizontal' && tw`flex-row`,
-    alignment === 'horizontal' &&
-      css`
-        svg:first-of-type {
-          margin-right: 10%;
-        }
-      `,
-    variant === 'violet' &&
-      css`
-        &:hover {
-          > svg {
-            fill: white;
-          }
-        }
-      `,
-    variant === 'white' &&
-      css`
-        > svg {
-          fill: white;
-        }
-      `,
-    css`
-      svg {
-        width: auto;
-      }
-      svg:first-of-type {
-        width: 64px;
-        min-width: 10%;
-      }
-    `,
-  ],
-);
+  alignment === 'vertical' && tw`flex-col`,
+  alignment === 'horizontal' && tw`flex-row`,
+]);

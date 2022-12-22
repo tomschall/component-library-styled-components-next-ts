@@ -28,7 +28,7 @@ const App = () => {
         avatar={{
           alt: 'Alt-Tag',
           fCallBack: () => {},
-          src: 'https://media.giphy.com/media/ZYzt9dXQUjmBa/giphy.gif',
+          src: '',
         }}
         comment={{
           fCallBack: function noRefCheck() {},
