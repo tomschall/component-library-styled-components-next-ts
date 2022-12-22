@@ -42,11 +42,10 @@ export const Navigation: React.FC<INavigationProps> = ({
             <MumbleLogo
               title={logo.title}
               href={logo.href}
+              variant="white"
               alignment="horizontal"
-              iconColor="fill-slate-white"
-              iconWidth="auto"
-              variant="violet"
               fCallBack={logo.fCallBack}
+              isNavigation={true}
             />
             <Row>
               <NaviButton
@@ -107,7 +106,6 @@ const NavigationStyles = styled.nav(() => [
     justify-center
     items-center
     w-full
-
     bg-violet-600
     h-[80px]    
 	`,

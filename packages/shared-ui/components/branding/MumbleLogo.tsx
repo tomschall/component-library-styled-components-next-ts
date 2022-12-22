@@ -9,9 +9,8 @@ export interface IMumbleLogoProps
   href: string;
   variant: 'violet' | 'gradient' | 'white';
   alignment: 'horizontal' | 'vertical';
-  iconWidth?: string | number | undefined;
-  iconHeight?: string | number | undefined;
   fCallBack?: () => void;
+  isNavigation?: boolean;
 }
 
 export const MumbleLogo: React.FC<IMumbleLogoProps> = ({
@@ -19,9 +18,8 @@ export const MumbleLogo: React.FC<IMumbleLogoProps> = ({
   href,
   variant,
   alignment,
-  iconWidth,
-  iconHeight,
   fCallBack,
+  isNavigation,
 }: IMumbleLogoProps) => {
   const [hover, setHover] = useState(false);
 
@@ -35,8 +33,8 @@ export const MumbleLogo: React.FC<IMumbleLogoProps> = ({
         defaultColor = tw`fill-violet-600`;
         return hover ? hoverColor : defaultColor;
       case 'gradient':
-        hoverColor = tw`fill-pink-900`;
-        defaultColor = tw`fill-pink-600`;
+        hoverColor = tw`fill-violet-900`;
+        defaultColor = tw`fill-violet-600`;
         return hover ? hoverColor : defaultColor;
       case 'white':
         hoverColor = tw`fill-slate-white`;
@@ -45,68 +43,57 @@ export const MumbleLogo: React.FC<IMumbleLogoProps> = ({
     }
   };
 
-  const SvgStyles = () => {
-    switch (alignment) {
-      case 'horizontal':
-        return tw`min-w-[100px] mr-[10%] first-of-type:mr-12 first-of-type:w-64 first-of-type:min-w-[10%]` as TwStyle;
-      case 'vertical':
-        return tw`min-w-[100px] first-of-type:mr-12 first-of-type:w-64 first-of-type:min-w-[10%] mb-16` as TwStyle;
-    }
-  };
-
   const TextSvgStyles = () => {
     switch (alignment) {
       case 'horizontal':
-        return tw`w-[100%] min-w-[100px] first-of-type:mr-12 first-of-type:w-64 first-of-type:min-w-[10%] ml-8 mt-16` as TwStyle;
+        return isNavigation ? (tw`ml-2` as TwStyle) : (tw`ml-24` as TwStyle);
       case 'vertical':
-        return tw`w-[100%] min-w-[100px] first-of-type:mr-12 first-of-type:w-64 first-of-type:min-w-[10%] mb-16 ml-8 mt-16` as TwStyle;
+        return isNavigation ? (tw`mt-8` as TwStyle) : (tw`mt-16` as TwStyle);
     }
   };
 
   return (
     <>
-      <MumbleLogoStyled
+      <MumbleLogoStyledLink
         title={title}
         href={href}
-        alignment={alignment}
         target={'_self'}
         onClick={fCallBack}
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
       >
-        <div>
+        <MumbleLogoStyledDiv alignment={alignment}>
           <LogoMumble
             fill={iconColor().fill as string}
-            css={SvgStyles()}
-            height={iconHeight}
-            width={iconWidth}
+            height={isNavigation ? 40 : 64}
+            width={64}
           />
           {variant === 'violet' && (
             <MumbleText
               fill={iconColor().fill as string}
               style={TextSvgStyles() as TwStyle}
-              height={iconHeight}
-              width={iconWidth}
+              height={isNavigation ? 30 : 48}
+              width={isNavigation ? 154 : 246}
             />
           )}
           {variant === 'white' && (
             <MumbleText
               fill={iconColor().fill as string}
               style={TextSvgStyles() as TwStyle}
-              height={iconHeight}
-              width={iconWidth}
+              height={isNavigation ? 30 : 48}
+              width={isNavigation ? 154 : 246}
             />
           )}
           {variant === 'gradient' && (
             <MumbleGradient
               fill={iconColor().fill as string}
               style={TextSvgStyles() as TwStyle}
-              height={iconHeight}
-              width={iconWidth}
+              height={isNavigation ? 30 : 48}
+              width={isNavigation ? 154 : 246}
             />
           )}
-        </div>
-      </MumbleLogoStyled>
+        </MumbleLogoStyledDiv>
+      </MumbleLogoStyledLink>
     </>
   );
 };
@@ -115,7 +102,13 @@ interface IMumbleLogoStyled {
   alignment: string;
 }
 
-const MumbleLogoStyled = styled.a(({ alignment }: IMumbleLogoStyled) => [
+const MumbleLogoStyledLink = styled.a(() => [
+  tw`
+    cursor-pointer
+  `,
+]);
+
+const MumbleLogoStyledDiv = styled.div(({ alignment }: IMumbleLogoStyled) => [
   tw`
     flex
     justify-between
