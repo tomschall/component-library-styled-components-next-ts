@@ -5,6 +5,7 @@ import {
   Cancel,
   Calendar,
   Checkmark,
+  LogoMumble,
 } from 'shared-ui/components/icons/components';
 import tw from 'twin.macro';
 
@@ -18,7 +19,8 @@ const App = () => {
         icon="logo"
         width="default"
       />
-      <Logo width={100} height={100} css={tw`fill-violet-600`} />
+      <Logo width={200} height={200} css={tw`fill-violet-600`} />
+      <LogoMumble width={200} height={200} css={tw`fill-violet-600`} />
       <Calendar width={100} height={100} css={tw`fill-violet-600`} />
       <Cancel width={100} height={100} css={tw`fill-violet-600`} />
       <Checkmark width={100} height={100} css={tw`fill-violet-600`} />

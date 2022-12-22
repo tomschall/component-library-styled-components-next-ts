@@ -9,8 +9,8 @@ export interface IMumbleLogoProps
   href: string;
   variant: 'violet' | 'gradient' | 'white';
   alignment: 'horizontal' | 'vertical';
-  iconWidth?: string | undefined;
-  iconHeight?: string | undefined;
+  iconWidth?: string | number | undefined;
+  iconHeight?: string | number | undefined;
   fCallBack?: () => void;
 }
 
@@ -19,6 +19,8 @@ export const MumbleLogo: React.FC<IMumbleLogoProps> = ({
   href,
   variant,
   alignment,
+  iconWidth,
+  iconHeight,
   fCallBack,
 }: IMumbleLogoProps) => {
   const [hover, setHover] = useState(false);
@@ -43,23 +45,21 @@ export const MumbleLogo: React.FC<IMumbleLogoProps> = ({
     }
   };
 
-  const styles = tw`ml-16`;
-
   const SvgStyles = () => {
     switch (alignment) {
       case 'horizontal':
-        return tw`w-[200px] h-[100%] min-w-[100px] mr-[10%] first-of-type:mr-12 first-of-type:w-64 first-of-type:min-w-[10%]` as TwStyle;
+        return tw`min-w-[100px] mr-[10%] first-of-type:mr-12 first-of-type:w-64 first-of-type:min-w-[10%]` as TwStyle;
       case 'vertical':
-        return tw`w-[200px] h-[100%] min-w-[100px] first-of-type:mr-12 first-of-type:w-64 first-of-type:min-w-[10%] mb-16` as TwStyle;
+        return tw`min-w-[100px] first-of-type:mr-12 first-of-type:w-64 first-of-type:min-w-[10%] mb-16` as TwStyle;
     }
   };
 
   const TextSvgStyles = () => {
     switch (alignment) {
       case 'horizontal':
-        return tw`w-[200px] h-[100%] min-w-[100px] first-of-type:mr-12 first-of-type:w-64 first-of-type:min-w-[10%] ml-16` as TwStyle;
+        return tw`w-[100%] min-w-[100px] first-of-type:mr-12 first-of-type:w-64 first-of-type:min-w-[10%] ml-8 mt-16` as TwStyle;
       case 'vertical':
-        return tw`w-[200px] h-[100%] min-w-[100px] first-of-type:mr-12 first-of-type:w-64 first-of-type:min-w-[10%] mb-16 ml-16` as TwStyle;
+        return tw`w-[100%] min-w-[100px] first-of-type:mr-12 first-of-type:w-64 first-of-type:min-w-[10%] mb-16 ml-8 mt-16` as TwStyle;
     }
   };
 
@@ -74,25 +74,38 @@ export const MumbleLogo: React.FC<IMumbleLogoProps> = ({
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
       >
-        <LogoMumble fill={iconColor().fill as string} style={SvgStyles()} />
-        {variant === 'violet' && (
-          <MumbleText
+        <div>
+          <LogoMumble
             fill={iconColor().fill as string}
-            style={TextSvgStyles() as TwStyle}
+            css={SvgStyles()}
+            height={iconHeight}
+            width={iconWidth}
           />
-        )}
-        {variant === 'white' && (
-          <MumbleText
-            fill={iconColor().fill as string}
-            style={TextSvgStyles() as TwStyle}
-          />
-        )}
-        {variant === 'gradient' && (
-          <MumbleGradient
-            fill={iconColor().fill as string}
-            style={TextSvgStyles() as TwStyle}
-          />
-        )}
+          {variant === 'violet' && (
+            <MumbleText
+              fill={iconColor().fill as string}
+              style={TextSvgStyles() as TwStyle}
+              height={iconHeight}
+              width={iconWidth}
+            />
+          )}
+          {variant === 'white' && (
+            <MumbleText
+              fill={iconColor().fill as string}
+              style={TextSvgStyles() as TwStyle}
+              height={iconHeight}
+              width={iconWidth}
+            />
+          )}
+          {variant === 'gradient' && (
+            <MumbleGradient
+              fill={iconColor().fill as string}
+              style={TextSvgStyles() as TwStyle}
+              height={iconHeight}
+              width={iconWidth}
+            />
+          )}
+        </div>
       </MumbleLogoStyled>
     </>
   );
@@ -109,6 +122,7 @@ const MumbleLogoStyled = styled.a(({ alignment }: IMumbleLogoStyled) => [
     items-center
     p-0
     cursor-pointer
+    h-[100%]
   `,
   alignment === 'vertical' && tw`flex-col`,
   alignment === 'horizontal' && tw`flex-row`,

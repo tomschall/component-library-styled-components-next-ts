@@ -48,32 +48,13 @@ export default {
       table: {
         disable: true,
       },
-      defaultValue: 'auto',
-    },
-    iconColor: {
-      control: false,
-      table: {
-        disable: true,
-      },
-      defaultValue: 'fill-violet-600',
+      defaultValue: '100%',
     },
   },
 } as ComponentMeta<typeof MumbleLogo>;
 
 const Template: ComponentStory<typeof MumbleLogo> = (args) => {
-  const props: ISVGProps = {
-    className: `${args.className}`,
-    width: `${args.iconWidth}`,
-    height: `${args.iconHeight}`,
-  };
-  const childrenWithProps = React.Children.map(args.children, (child) => {
-    if (React.isValidElement<ISVGProps>(child)) {
-      return React.cloneElement(child, props);
-    }
-    return child;
-  });
-
-  return <MumbleLogo {...args}>{childrenWithProps}</MumbleLogo>;
+  return <MumbleLogo {...args} />;
 };
 /**
  * @button
