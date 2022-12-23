@@ -1,11 +1,12 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { IconTemplate } from '../layouts/IconGrid';
 import { Settings } from '../../components/icons/components';
-import { Icons, IconTypes } from '../../components/icons/IconMap';
+import { Icons, IconsMapped, IconTypes } from '../../components/icons/IconMap';
 import { Heading } from '../../components/typography/Heading';
 import { Paragraph } from '../../components/typography/Paragraph';
 import tw, { TwStyle } from 'twin.macro';
 import React from 'react';
+import styled, { css } from 'styled-components';
 
 let tailWindColors: any[] = [
   tw`fill-slate-500`,
@@ -42,18 +43,16 @@ const TemplateIcon: ComponentStory<typeof Settings | any> = () => (
       />
       <Paragraph text="THE MUMBLE ICON COLLECTION" color={'white'} />
       <GridDiv>
-        {Object.keys(Icons).map((iconType, index) => {
+        {Object.keys(IconsMapped).map((iconType, index) => {
           tailWindColorsElement = tailWindColors.shift() || '';
 
-          const Icon = React.cloneElement(
-            Icons[iconType as IconTypes] || Icons['settings'],
-            {
-              fill: tailWindColorsElement.fill,
-              width: 'auto',
-              height: 'auto',
-              iconName: iconType,
-            },
-          );
+          const createIcon = (icon: any) => {
+            return styled(IconsMapped[icon as IconTypes])(() => [
+              tw`w-full h-full`,
+            ]);
+          };
+
+          const Icon = createIcon(iconType);
 
           tailWindColors.push(tailWindColorsElement);
 
@@ -62,7 +61,9 @@ const TemplateIcon: ComponentStory<typeof Settings | any> = () => (
 
           return (
             <IconCol key={index}>
-              <IconFlex>{Icon}</IconFlex>
+              <IconFlex>
+                <Icon fill={tailWindColorsElement.fill as string} />
+              </IconFlex>
               <Heading
                 tag="h3"
                 title={iconType}
@@ -80,16 +81,21 @@ const TemplateIcon: ComponentStory<typeof Settings | any> = () => (
 );
 
 const TemplateIconSingle: ComponentStory<any> = (args) => {
-  const Icon = React.cloneElement(Icons[args.iconName as IconTypes], {
-    fill: args.iconColor.fill,
-    width: args.iconWidth,
-    height: args.iconHeight,
-    iconName: 'logo',
-  });
-
   const Div = tw.div`grid grid-rows-4 grid-flow-col gap-4`;
 
-  return <Div>{Icon}</Div>;
+  const createIcon = (icon: any) => {
+    return styled(IconsMapped[icon as IconTypes])(() => [
+      tw`w-[200px] h-[200px] fill-violet-500`,
+    ]);
+  };
+
+  const Icon = createIcon('logo');
+
+  return (
+    <Div>
+      <Icon />
+    </Div>
+  );
 };
 
 export const All = TemplateIcon.bind({});
@@ -97,12 +103,5 @@ export const All = TemplateIcon.bind({});
 All.storyName = 'Collection';
 
 export const Single = TemplateIconSingle.bind({});
-
-Single.args = {
-  iconName: 'heart-outlined',
-  iconColor: tw`fill-pink-500`,
-  iconWidth: '300px',
-  iconHeight: '300px',
-};
 
 Single.storyName = 'Icon';
