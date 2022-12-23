@@ -1,12 +1,6 @@
 import React from 'react';
 import { Button, Mumble } from 'shared-ui/dist';
-import {
-  Logo,
-  Cancel,
-  Calendar,
-  Checkmark,
-  LogoMumble,
-} from 'shared-ui/components/icons/components';
+import { Logo, Cancel, Calendar, Checkmark, LogoMumble } from 'shared-ui/dist';
 import tw from 'twin.macro';
 
 const App = () => {

@@ -20,16 +20,13 @@ export const ImageContainer: React.FC<IImageContainerProps> = ({
   loading = false,
 }) => {
   const getIcon = () => {
-    const color: TwStyle = tw`fill-slate-white`;
-    const styles: TwStyle = tw`w-full h-full`;
-
     switch (type) {
       case 'fullscreen':
-        return <Fullscreen style={styles} fill={color?.fill as string} />;
+        return <StyledFullScreen />;
       case 'edit':
-        return <Edit style={styles} fill={color?.fill as string} />;
+        return <StyledEdit />;
       case 'repost':
-        return <Repost style={styles} fill={color?.fill as string} />;
+        return <StyledRepost />;
     }
   };
 
@@ -146,3 +143,11 @@ const Figure = styled.figure(() => [
     mb-24
   `,
 ]);
+
+const StyledFullScreen = styled(Fullscreen)(() => [
+  tw`w-32 h-32 fill-slate-white`,
+]);
+
+const StyledEdit = styled(Edit)(() => [tw`w-32 h-32 fill-slate-white`]);
+
+const StyledRepost = styled(Repost)(() => [tw`w-32 h-32 fill-slate-white`]);

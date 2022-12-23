@@ -1,5 +1,5 @@
 {
-  "name": "component-library-styled-components",
+  "name": "@smartive-education/yeahyeahyeah-mumble",
   "babelMacros": {
     "twin": {
       "config": "./../../tailwind.config.js",
