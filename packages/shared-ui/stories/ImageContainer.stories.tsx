@@ -23,10 +23,6 @@ export default {
     fCallBack: {
       action: () => 'handleClick',
     },
-    icon: {
-      control: 'select',
-      defaultValue: 'fullscreen',
-    },
     loading: {
       control: 'boolean',
       description: 'Image loading state',
