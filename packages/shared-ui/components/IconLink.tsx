@@ -27,63 +27,38 @@ export const IconLink: React.FC<IIconLinkProps> = ({
 }) => {
   const [hover, setHover] = useState(false);
 
-  const iconColor = () => {
-    let hoverColor: TwStyle;
-    let defaultColor: TwStyle;
-
-    switch (variant) {
-      case 'slate':
-        hoverColor = tw`fill-slate-600`;
-        defaultColor = tw`fill-slate-400`;
-        return hover ? hoverColor : defaultColor;
-      case 'violet':
-        hoverColor = tw`fill-violet-900`;
-        defaultColor = tw`fill-violet-600`;
-        return hover ? hoverColor : defaultColor;
-    }
-  };
-
   const getIcon = () => {
-    const color = iconColor();
-    const styles = tw`mr-6 mt-1`;
-
     switch (type) {
       case 'username':
-        return (
-          <Profile
-            style={styles}
-            fill={color?.fill as string}
-            width="12px"
-            height="12px"
-          />
+        const StyledProfile = styled(Profile)(
+          ({ variant, hover }: IStyleProps) => [
+            tw`w-12 h-12 mr-6 mt-1`,
+            IconColor(variant, hover),
+          ],
         );
+        return <StyledProfile variant={variant} hover={hover} />;
       case 'timestamp':
-        return (
-          <Time
-            style={styles}
-            fill={color?.fill as string}
-            width="12px"
-            height="12px"
-          />
-        );
+        const StyledTime = styled(Time)(({ variant, hover }: IStyleProps) => [
+          tw`w-12 h-12 mr-6 mt-1`,
+          IconColor(variant, hover),
+        ]);
+        return <StyledTime variant={variant} hover={hover} />;
       case 'location':
-        return (
-          <Location
-            style={styles}
-            fill={color?.fill as string}
-            width="12px"
-            height="12px"
-          />
+        const StyledLocaton = styled(Location)(
+          ({ variant, hover }: IStyleProps) => [
+            tw`w-12 h-12 mr-6 mt-1`,
+            IconColor(variant, hover),
+          ],
         );
+        return <StyledLocaton variant={variant} hover={hover} />;
       case 'joined':
-        return (
-          <Calendar
-            style={styles}
-            fill={color?.fill as string}
-            width="12px"
-            height="12px"
-          />
+        const StyledCalendar = styled(Calendar)(
+          ({ variant, hover }: IStyleProps) => [
+            tw`w-12 h-12 mr-6 mt-1`,
+            IconColor(variant, hover),
+          ],
         );
+        return <StyledCalendar variant={variant} hover={hover} />;
     }
   };
 
@@ -116,6 +91,7 @@ export const IconLink: React.FC<IIconLinkProps> = ({
 
 interface IStyleProps {
   variant?: string;
+  hover?: boolean;
 }
 
 /**
@@ -143,3 +119,20 @@ const IconLinkDivStyles = styled.div(({ variant }: IStyleProps) => [
   variant === 'slate' && tw`text-slate-400 hover:(text-slate-600)`,
   variant === 'violet' && tw`text-violet-600 hover:(text-violet-900)`,
 ]);
+
+const IconColor = (variant?: string, hover?: boolean) => {
+  let hoverColor: TwStyle;
+  let defaultColor: TwStyle;
+
+  switch (variant) {
+    case 'slate':
+      hoverColor = tw`fill-slate-600`;
+      defaultColor = tw`fill-slate-400`;
+      return hover ? hoverColor : defaultColor;
+    case 'violet':
+      hoverColor = tw`fill-violet-900`;
+      defaultColor = tw`fill-violet-600`;
+      return hover ? hoverColor : defaultColor;
+  }
+  return null;
+};
