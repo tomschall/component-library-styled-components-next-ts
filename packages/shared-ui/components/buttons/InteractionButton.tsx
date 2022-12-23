@@ -71,9 +71,6 @@ export const InteractionButton: React.FC<IInteractionButton> = ({
   };
 
   if (type === 'comment') {
-    const hoverStyle: TwStyle = tw`fill-violet-500`;
-    const defaultStyle: TwStyle = tw`fill-slate-600`;
-
     return (
       <CommentStyles
         className={fontColor}
@@ -83,21 +80,9 @@ export const InteractionButton: React.FC<IInteractionButton> = ({
         onMouseLeave={() => setHover(false)}
       >
         {count === 0 ? (
-          <ReplyOutlined
-            fill={
-              count === 0 && !hover
-                ? (defaultStyle.fill as string)
-                : (hoverStyle.fill as string)
-            }
-            width="16px"
-            height="16px"
-          />
+          <StyledReplyOutlined hover={hover} count={count} />
         ) : (
-          <ReplyFilled
-            fill={hoverStyle.fill as string}
-            width="16px"
-            height="16px"
-          />
+          <StyledReplyFilled hover={hover} count={count} />
         )}
         {count === 0 ? false : `${count}`} {label}
       </CommentStyles>
@@ -105,9 +90,6 @@ export const InteractionButton: React.FC<IInteractionButton> = ({
   }
 
   if (type === 'like') {
-    const hoverStyle: TwStyle = tw`fill-pink-500`;
-    const defaultStyle: TwStyle = tw`fill-slate-600`;
-
     return (
       <LikeStyles
         className={fontColor}
@@ -117,21 +99,9 @@ export const InteractionButton: React.FC<IInteractionButton> = ({
         onMouseLeave={() => setHover(false)}
       >
         {isFavourite ? (
-          <HeartFilled
-            fill={hoverStyle.fill as string}
-            width="16px"
-            height="16px"
-          />
+          <StyledHeartFilled hover={hover} count={count} />
         ) : (
-          <HeartOutlined
-            fill={
-              count === 0 && !hover
-                ? (defaultStyle.fill as string)
-                : (hoverStyle.fill as string)
-            }
-            width="16px"
-            height="16px"
-          />
+          <StyledHeartOutlined hover={hover} count={count} />
         )}
         {(count === 1 && isFavourite === true) || count === 0 ? '' : count}{' '}
         {label}
@@ -146,11 +116,16 @@ export const InteractionButton: React.FC<IInteractionButton> = ({
  * @Button
  * @desc Button styles
  */
-interface IButtonStyles {
+interface IInteractionButtonStyles {
   count: number;
 }
 
-const CommentStyles = styled.button(({ count }: IButtonStyles) => [
+interface IInteractionSvgStyles {
+  hover: boolean;
+  count?: number;
+}
+
+const CommentStyles = styled.button(({ count }: IInteractionButtonStyles) => [
   tw`
     font-semibold
     leading-normal
@@ -169,14 +144,9 @@ const CommentStyles = styled.button(({ count }: IButtonStyles) => [
     
 `,
   count === 0 && tw`text-slate-600 hover:(text-violet-600 bg-violet-50)`,
-  css`
-    svg {
-      margin: 0 8px 0 0;
-    }
-  `,
 ]);
 
-const LikeStyles = styled.button(({ count }: IButtonStyles) => [
+const LikeStyles = styled.button(({ count }: IInteractionButtonStyles) => [
   tw`
   font-semibold
   leading-normal
@@ -191,13 +161,59 @@ const LikeStyles = styled.button(({ count }: IButtonStyles) => [
   w-auto
   outline-none
   bg-none
-  hover:(text-pink-900 bg-pink-50)
+  hover:(text-pink-600 bg-pink-50)
   `,
   count >= 1 && tw`text-pink-900`,
   count === 0 && tw`text-slate-600 hover:(text-pink-600 bg-pink-50)`,
-  css`
-    svg {
-      margin: 0 8px 0 0;
-    }
-  `,
 ]);
+
+const StyledReplyOutlined = styled(ReplyOutlined)(
+  ({ hover }: IInteractionSvgStyles) => [
+    tw`
+      fill-slate-600
+      h-16
+      w-16
+      mr-8
+    `,
+    hover && tw`fill-violet-600`,
+  ],
+);
+
+const StyledReplyFilled = styled(ReplyFilled)(
+  ({ hover, count }: IInteractionSvgStyles) => [
+    tw`
+      fill-slate-600
+      h-16
+      w-16
+      mr-8
+    `,
+    hover && tw`fill-violet-600`,
+    count && count >= 1 && tw`fill-violet-600`,
+  ],
+);
+
+const StyledHeartOutlined = styled(HeartOutlined)(
+  ({ hover, count }: IInteractionSvgStyles) => [
+    tw`
+      fill-slate-600
+      h-16
+      w-16
+      mr-8
+    `,
+    hover && tw`fill-pink-500`,
+    count === 0 && !hover ? tw`fill-slate-600` : tw`fill-pink-500`,
+  ],
+);
+
+const StyledHeartFilled = styled(HeartFilled)(
+  ({ hover, count }: IInteractionSvgStyles) => [
+    tw`
+      fill-slate-600
+      h-16
+      w-16
+      mr-8
+    `,
+    hover && tw`fill-pink-500`,
+    count === 0 && !hover ? tw`fill-slate-600` : tw`fill-pink-500`,
+  ],
+);

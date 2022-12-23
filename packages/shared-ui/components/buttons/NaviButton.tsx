@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import tw from 'twin.macro';
-import { Icons, IconTypes } from '../icons/IconMap';
+import { IconsMapped, IconTypes } from '../icons/IconMap';
 import { Avatar } from '../Avatar';
 
 export interface INaviButtonProps
@@ -20,24 +20,20 @@ export const NaviButton: React.FC<INaviButtonProps> = ({
   fCallBack,
   icon = 'logo',
 }) => {
-  const styles = tw`fill-slate-white`;
-
-  const Icon = React.cloneElement(Object(Icons[icon]), {
-    ...styles,
-  });
+  const Icon = createIcon(icon);
 
   return (
     <>
       {variant === 'default' && (
         <ButtonStyles variant={variant} disabled={disabled} onClick={fCallBack}>
-          {Icon}
+          <Icon />
           <Span>{label}</Span>
         </ButtonStyles>
       )}
 
       {variant === 'icon' && (
         <ButtonStyles variant={variant} disabled={disabled} onClick={fCallBack}>
-          {Icon}
+          <Icon />
         </ButtonStyles>
       )}
 
@@ -107,3 +103,7 @@ const ButtonStyles = styled.button(({ variant }: ButtonProps) => [
   buttonFocus,
   variant === 'icon' && variantIcon,
 ]);
+
+const createIcon = (icon: any) => {
+  return styled(IconsMapped[icon as IconTypes])(() => [tw`fill-slate-white`]);
+};

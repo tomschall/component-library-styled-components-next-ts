@@ -1,7 +1,7 @@
-import React, { SVGAttributes, SVGProps, useState } from 'react';
-import styled, { css } from 'styled-components';
-import tw, { TwStyle } from 'twin.macro';
-import { Share } from '../icons/components';
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import tw from 'twin.macro';
+import { IconsMapped, IconTypes } from '../icons/IconMap';
 
 export interface IShareButton
   extends React.HtmlHTMLAttributes<HTMLButtonElement> {
@@ -14,6 +14,7 @@ export const ShareButton: React.FC<IShareButton> = ({
   fCallBack,
 }) => {
   const [labelText, setLabelText] = useState<string>(label);
+  const [hover, setHover] = useState(false);
 
   const handleClick = () => {
     setLabelText('Link copied');
@@ -25,50 +26,62 @@ export const ShareButton: React.FC<IShareButton> = ({
     fCallBack && fCallBack();
   };
 
-  const color: TwStyle = tw`fill-slate-600`;
+  const Share = createIcon('share');
 
   return (
     <>
-      <ButtonStyles onClick={handleClick}>
-        <Share fill={color.fill as string} width="16px" height="16px" />
+      <ButtonStyles
+        onClick={handleClick}
+        onMouseEnter={() => setHover(true)}
+        onMouseLeave={() => setHover(false)}
+        hover={hover}
+      >
+        <Share hover={hover} />
         {labelText}
       </ButtonStyles>
     </>
   );
 };
 
+interface IShareButtonStyles {
+  hover: boolean;
+}
+
 /**
  * @Button
  * @desc Button styles
  */
-const ButtonStyles = styled.button(() => [
+const ButtonStyles = styled.button(({ hover }: IShareButtonStyles) => [
   tw`
     text-skin-light
     font-semibold
     leading-normal
     text-slate-600
-
     flex
     grow-0
     justify-center
     items-center
     p-12
     rounded-full
-    
     w-auto
     outline-none
     bg-none
-    
-    hover:(text-slate-700 bg-slate-100)
     focus:(text-slate-700)
   `,
-  css`
-    svg {
-      margin-left: 0;
-      margin-right: 8px;
-    }
-    :hover svg {
-      fill: #334155;
-    }
-  `,
+  hover && tw`text-slate-700 bg-slate-100`,
 ]);
+
+const createIcon = (icon: any) => {
+  return styled(IconsMapped[icon as IconTypes])(
+    ({ hover }: IShareButtonStyles) => [
+      tw`
+        fill-slate-600
+        h-16
+        w-16
+        ml-0
+        mr-8
+        focus:(text-slate-700)`,
+      hover && tw`fill-slate-700`,
+    ],
+  );
+};

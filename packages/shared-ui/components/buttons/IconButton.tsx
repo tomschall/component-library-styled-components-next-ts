@@ -1,7 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import tw from 'twin.macro';
-import { Icons, IconTypes } from '../icons/IconMap';
+import { IconsMapped, IconTypes } from '../icons/IconMap';
 
 export interface IconButtonProps
   extends React.HtmlHTMLAttributes<HTMLButtonElement> {
@@ -17,18 +17,18 @@ export const IconButton: React.FC<IconButtonProps> = ({
   variant = 'edit',
   fCallBack,
 }) => {
-  const styles = tw`fill-slate-white`;
-
-  const Icon = React.cloneElement(Object(Icons[icon]), {
-    ...styles,
-  });
+  const Icon = createIcon(icon);
 
   return (
     <ButtonStyles variant={variant} onClick={fCallBack}>
-      {Icon}
+      <Icon />
       <p>{label}</p>
     </ButtonStyles>
   );
+};
+
+const createIcon = (icon: any) => {
+  return styled(IconsMapped[icon as IconTypes])(() => [tw`fill-slate-white`]);
 };
 
 /**

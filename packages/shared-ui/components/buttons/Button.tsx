@@ -1,6 +1,6 @@
 import React from 'react';
 import tw, { css, styled } from 'twin.macro';
-import { Icons, IconTypes } from '../icons/IconMap';
+import { IconsMapped, IconTypes } from '../icons/IconMap';
 
 export interface IButtonProps
   extends React.HtmlHTMLAttributes<HTMLButtonElement> {
@@ -22,13 +22,9 @@ export const Button: React.FC<IButtonProps> = ({
   width = 'default',
   disabled = false,
   handleClick,
-  icon = 'logo',
+  icon = 'calendar',
 }) => {
-  const styles = tw`fill-slate-white`;
-
-  const Icon = React.cloneElement(Object(Icons[icon]), {
-    ...styles,
-  });
+  const Icon = createIcon(icon);
 
   return (
     <StyledButton
@@ -40,7 +36,7 @@ export const Button: React.FC<IButtonProps> = ({
       onClick={handleClick}
     >
       {label}
-      {Icon}
+      <Icon />
     </StyledButton>
   );
 };
@@ -50,6 +46,12 @@ interface ButtonProps {
   width?: string;
   size?: string;
 }
+
+const createIcon = (icon: any) => {
+  return styled(IconsMapped[icon as IconTypes])(() => [
+    tw`ml-64 fill-slate-white`,
+  ]);
+};
 
 /**
  * @Button
